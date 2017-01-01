@@ -6,23 +6,22 @@ import java.util.regex.Pattern;
 
 public class WordCount {
 
-  public boolean isAlphaNumeric(String s) {
+  private boolean isAlphaNumeric(String s) {
     String pattern = "^[a-zA-Z!^&@$%0-9,]*$";
     return s.matches(pattern);
   }
 
-  public boolean isAlpha(String s) {
+  private boolean isAlpha(String s) {
     String pattern = "^[a-zA-Z0-9]*$";
     return s.matches(pattern);
   }
 
 
-  public String validWord(String s) {
+  private String validWord(String s) {
     String wordToBePrinted = "";
     for (int i = 0; i < s.length(); i++) {
       if (i + 1 <= s.length() && isAlpha(s.substring(i, i + 1)))
         wordToBePrinted += s.charAt(i);
-
     }
     return wordToBePrinted;
 
@@ -48,16 +47,15 @@ public class WordCount {
     int startingIndexOfWord = 0;
     int countSpaces = 0;
     countSpaces = getCountSpaces(word, countSpaces);
-    int i = 0;
-    while (i <= countSpaces) {
+    int numberOfAddition = 0;
+    while (numberOfAddition <= countSpaces) {
 
       String wordToBeAdded = extractWord(startingIndexOfWord, lastIndexOfWord, word);
       System.out.print("words  " + wordToBeAdded);
       boolean validWord = isAlphaNumeric(wordToBeAdded);
 
       if (validWord) {
-        String validWordToBeAdded = validWord(wordToBeAdded);
-        System.out.println("Valid Word " + validWordToBeAdded);
+        String validWordToBeAdded = validWord(wordToBeAdded).toLowerCase();
 
         if (putWords.containsKey(validWordToBeAdded)) {
           putWords.put(validWordToBeAdded, putWords.get(validWordToBeAdded) + 1);
@@ -67,7 +65,7 @@ public class WordCount {
       }
       startingIndexOfWord += wordToBeAdded.length() + 1;
 
-      i++;
+      numberOfAddition++;
     }
 
     return putWords;
