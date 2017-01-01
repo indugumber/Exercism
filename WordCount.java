@@ -31,10 +31,8 @@ public class WordCount {
     String wordToBeAdded = "";
     if (startingIndexOfWord > word.lastIndexOf(' ')) {
       wordToBeAdded = (word.substring(startingIndexOfWord));
-      System.out.println(wordToBeAdded + " last word  ");
     } else {
       lastIndexOfWord = word.indexOf(' ', startingIndexOfWord);
-      System.out.println(wordToBeAdded + " ");
       wordToBeAdded = (word.substring(startingIndexOfWord, lastIndexOfWord));
     }
     return wordToBeAdded;
