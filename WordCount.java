@@ -37,7 +37,6 @@ public class WordCount {
       System.out.println(wordToBeAdded + " ");
       wordToBeAdded = (word.substring(startingIndexOfWord, lastIndexOfWord));
     }
-
     return wordToBeAdded;
   }
 
@@ -49,27 +48,26 @@ public class WordCount {
     countSpaces = getCountSpaces(word, countSpaces);
     int numberOfAddition = 0;
     while (numberOfAddition <= countSpaces) {
-
       String wordToBeAdded = extractWord(startingIndexOfWord, lastIndexOfWord, word);
-      System.out.print("words  " + wordToBeAdded);
       boolean validWord = isAlphaNumeric(wordToBeAdded);
-
-      if (validWord) {
-        String validWordToBeAdded = validWord(wordToBeAdded).toLowerCase();
-
-        if (putWords.containsKey(validWordToBeAdded)) {
-          putWords.put(validWordToBeAdded, putWords.get(validWordToBeAdded) + 1);
-        } else {
-          putWords.put(validWordToBeAdded, 1);
-        }
-      }
+      addingWordToMap(putWords, wordToBeAdded, validWord);
       startingIndexOfWord += wordToBeAdded.length() + 1;
-
       numberOfAddition++;
     }
-
     return putWords;
 
+  }
+
+  private void addingWordToMap(Map<String, Integer> putWords, String wordToBeAdded, boolean validWord) {
+    if (validWord) {
+      String validWordToBeAdded = validWord(wordToBeAdded).toLowerCase();
+
+      if (putWords.containsKey(validWordToBeAdded)) {
+        putWords.put(validWordToBeAdded, putWords.get(validWordToBeAdded) + 1);
+      } else {
+        putWords.put(validWordToBeAdded, 1);
+      }
+    }
   }
 
   private int getCountSpaces(String word, int countSpaces) {
