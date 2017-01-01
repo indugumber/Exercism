@@ -10,7 +10,22 @@ public class WordCount {
     String pattern= "^[a-zA-Z!^&@$%0-9,]*$";
     return s.matches(pattern);
   }
+  public boolean isAlpha(String s){
+    String pattern= "^[a-zA-Z0-9,]*$";
+    return s.matches(pattern);
+  }
 
+
+  public String validWord(String s){
+    String wordToBePrinted ="";
+    for (int i=0;i<s.length();i++)
+    {if(i+1<=s.length() && isAlpha(s.substring(i,i+1)))
+      wordToBePrinted+=s.charAt(i);
+
+    }
+    return  wordToBePrinted;
+
+  }
 
   private String extractWord(int startingIndexOfWord, int lastIndexOfWord, String word){
     String wordToBeAdded ="";
@@ -40,12 +55,15 @@ public class WordCount {
       boolean validWord =isAlphaNumeric(wordToBeAdded);
 
 if(validWord) {
-  if (putWords.containsKey(wordToBeAdded)) {
+  String validWordToBeAdded = validWord(wordToBeAdded);
+  System.out.println("Valid Word " + validWordToBeAdded);
+
+  if (putWords.containsKey(validWordToBeAdded)) {
     // System.out.println("value of " + wordToBeAdded + putWords.get(wordToBeAdded));
-    putWords.put(wordToBeAdded, putWords.get(wordToBeAdded) + 1);
+    putWords.put(validWordToBeAdded, putWords.get(validWordToBeAdded) + 1);
   } else {
     //  System.out.println("value of " + wordToBeAdded + putWords.get(wordToBeAdded));
-    putWords.put(wordToBeAdded, 1);
+    putWords.put(validWordToBeAdded, 1);
   }
 }
             startingIndexOfWord += wordToBeAdded.length()+1; //lastIndexOfWord + 1;
